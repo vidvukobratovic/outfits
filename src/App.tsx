@@ -3,6 +3,7 @@ import Top from "./components/Top";
 import Pants from "./components/Pants";
 import Shoes from "./components/Shoes";
 import Controls from "./components/Controls";
+import "./index.css"
 
 type OutfitItem = string;
 
@@ -31,9 +32,9 @@ const App: React.FC = () => {
   };
 
   return (
-    <div style={{ textAlign: "center" }}>
-      <h1>Outfit Generator</h1>
-      <div style={{ display: "flex", justifyContent: "center", gap: "20px" }}>
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center gap-6">
+      <h1 className="text-3xl font-bold text-gray-800">Outfit Generator</h1>
+      <div className="flex gap-8">
         <Top item={currentTop} />
         <Pants item={currentPants} />
         <Shoes item={currentShoes} />
