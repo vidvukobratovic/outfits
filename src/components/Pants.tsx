@@ -1,11 +1,19 @@
-type PantsProps = {
-  item: string;
-};
+import React from "react";
 
-const Pants: React.FC<PantsProps> = ({ item }) => (
-  <div className="flex items-center justify-center bg-green-200 w-40 h-40 rounded-lg shadow-md">
-    <span className="text-lg font-semibold text-green-800">{item}</span>
-  </div>
-);
+interface PantsProps {
+  item: string;
+  onClick: () => void;
+}
+
+const Pants: React.FC<PantsProps> = ({ item, onClick }) => {
+  return (
+    <div
+      onClick={onClick}
+      className="bg-green-200 p-4 rounded-lg shadow-md text-center text-lg cursor-pointer hover:bg-green-300 transition"
+    >
+      👖 {item}
+    </div>
+  );
+};
 
 export default Pants;

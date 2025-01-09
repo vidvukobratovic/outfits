@@ -1,11 +1,19 @@
-type TopProps = {
-  item: string;
-};
+import React from "react";
 
-const Top: React.FC<TopProps> = ({ item }) => (
-  <div className="flex items-center justify-center bg-blue-200 w-40 h-40 rounded-lg shadow-md">
-    <span className="text-lg font-semibold text-blue-800">{item}</span>
-  </div>
-);
+interface TopProps {
+  item: string;
+  onClick: () => void;
+}
+
+const Top: React.FC<TopProps> = ({ item, onClick }) => {
+  return (
+    <div
+      onClick={onClick}
+      className="bg-blue-200 p-4 rounded-lg shadow-md text-center text-lg cursor-pointer hover:bg-blue-300 transition"
+    >
+      🧥 {item}
+    </div>
+  );
+};
 
 export default Top;

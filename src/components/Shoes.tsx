@@ -1,11 +1,19 @@
-type ShoesProps = {
-  item: string;
-};
+import React from "react";
 
-const Shoes: React.FC<ShoesProps> = ({ item }) => (
-  <div className="flex items-center justify-center bg-yellow-200 w-40 h-40 rounded-lg shadow-md">
-    <span className="text-lg font-semibold text-yellow-800">{item}</span>
-  </div>
-);
+interface ShoesProps {
+  item: string;
+  onClick: () => void;
+}
+
+const Shoes: React.FC<ShoesProps> = ({ item, onClick }) => {
+  return (
+    <div
+      onClick={onClick}
+      className="bg-red-200 p-4 rounded-lg shadow-md text-center text-lg cursor-pointer hover:bg-red-300 transition"
+    >
+      👟 {item}
+    </div>
+  );
+};
 
 export default Shoes;
