@@ -18,6 +18,12 @@ const App: React.FC = () => {
   const getRandomItem = (items: OutfitItem[]): OutfitItem =>
     items[Math.floor(Math.random() * items.length)];
 
+  const randomizeOutfit = () => {
+    setCurrentTop(getRandomItem(tops));
+    setCurrentPants(getRandomItem(pants));
+    setCurrentShoes(getRandomItem(shoes));
+  };
+
   const randomizeItem = (type: "top" | "pants" | "shoes") => {
     if (type === "top") setCurrentTop(getRandomItem(tops));
     if (type === "pants") setCurrentPants(getRandomItem(pants));
@@ -25,13 +31,16 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center gap-6">
-      <h1 className="text-3xl font-bold text-gray-800">Outfit Generator</h1>
-      {/* Vertical Stack for Outfit */}
-      <div className="flex flex-col items-center gap-4">
-        <Top item={currentTop} onClick={() => randomizeItem("top")} />
-        <Pants item={currentPants} onClick={() => randomizeItem("pants")} />
-        <Shoes item={currentShoes} onClick={() => randomizeItem("shoes")} />
+    <div 
+      className="min-h-screen bg-gray-100 flex flex-col items-center justify-center gap-6"
+      onClick={randomizeOutfit} 
+    >
+      <div 
+        className="flex flex-col items-center gap-4"
+        onClick={(e) => e.stopPropagation()}>
+          <Top item={currentTop} onClick={() => randomizeItem("top")} />
+          <Pants item={currentPants} onClick={() => randomizeItem("pants")} />
+          <Shoes item={currentShoes} onClick={() => randomizeItem("shoes")} />
       </div>
     </div>
   );
