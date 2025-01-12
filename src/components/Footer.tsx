@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import text from "../constants/text.json"
 
 interface FooterProps {
   onClick?: React.MouseEventHandler<HTMLDivElement>;
@@ -52,18 +53,13 @@ const Footer: React.FC<FooterProps> = ({ onClick }) => {
             className="bg-white text-black rounded-lg p-6 shadow-lg w-11/12 max-w-md"
             onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
           >
-            <h2 className="text-xl font-bold mb-4">About the App</h2>
-            <p className="mb-4">
-              Welcome to the Outfit Generator! Use this app to create fun and
-              unique outfits by randomly selecting tops, pants, and shoes. You
-              can tap individual items to change them or click anywhere else to
-              randomize the entire outfit.
-            </p>
+            <h2 className="text-xl font-bold mb-4">{text.footer.about}</h2>
+            <p className="mb-4">{text.footer.helpText}</p>
             <button
               className="w-full py-2 bg-red-600 hover:bg-red-500 text-white rounded-md font-bold transition-all"
               onClick={toggleHelp}
             >
-              Close
+              {text.footer.close}
             </button>
           </div>
         </div>

@@ -1,0 +1,12 @@
+{
+    "header": {
+        "title": "Outfit Generator"
+    },
+    "footer": {
+        "about": "About the App",
+        "help": "Help",
+        "helpText": "Welcome to the Outfit Generator! Use this app to create fun and unique outfits by randomly selecting tops, pants, and shoes. You can tap individual items to change them or click anywhere else to randomize the entire outfit.",
+        "close": "Close"
+    }
+  }
+  

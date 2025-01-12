@@ -1,6 +1,7 @@
 import React from "react";
 import MenuButton from "./MenuButton";
 import ProfileButton from "./ProfileButton";
+import text from "../constants/text.json";
 
 interface HeaderProps {
   onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -13,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ onClick }) => {
       onClick={onClick}
     >
       <MenuButton />
-      <h1 className="text-lg font-semibold">Outfit Generator</h1>
+      <h1 className="text-lg font-semibold">{text.header.title}</h1>
       <ProfileButton />
     </header>
   );
