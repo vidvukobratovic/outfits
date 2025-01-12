@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import Header from "./components/Header";
 import Top from "./components/Top";
 import Pants from "./components/Pants";
 import Shoes from "./components/Shoes";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import "./index.css";
 
 type OutfitItem = string;
@@ -33,20 +34,18 @@ const App: React.FC = () => {
 
   return (
     <div
-      className="min-h-screen bg-gray-100 flex flex-col"
-      onClick={randomizeOutfit} // Randomize entire outfit on screen click
+      className="min-h-screen bg-gray-100 flex flex-col justify-between"
+      onClick={randomizeOutfit}
     >
-      <Header onClick={(e) => e.stopPropagation()} /> {/* Prevent header clicks from propagating */}
-      <main className="flex flex-col items-center justify-center gap-6 flex-grow">
-        <div
-          className="flex flex-col items-center gap-4"
-          onClick={(e) => e.stopPropagation()} // Prevent click propagation to the parent
-        >
+      <Header onClick={(e) => e.stopPropagation()} />
+      <main className="flex flex-col items-center justify-center flex-grow gap-6">
+        <div className="flex flex-col items-center">
           <Top item={currentTop} onClick={() => randomizeItem("top")} />
           <Pants item={currentPants} onClick={() => randomizeItem("pants")} />
           <Shoes item={currentShoes} onClick={() => randomizeItem("shoes")} />
         </div>
       </main>
+      <Footer onClick={(e) => e.stopPropagation()} />
     </div>
   );
 };
