@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Header from "./components/Header";
 import Top from "./components/Top";
 import Pants from "./components/Pants";
 import Shoes from "./components/Shoes";
@@ -31,17 +32,21 @@ const App: React.FC = () => {
   };
 
   return (
-    <div 
-      className="min-h-screen bg-gray-100 flex flex-col items-center justify-center gap-6"
-      onClick={randomizeOutfit} 
+    <div
+      className="min-h-screen bg-gray-100 flex flex-col"
+      onClick={randomizeOutfit} // Randomize entire outfit on screen click
     >
-      <div 
-        className="flex flex-col items-center gap-4"
-        onClick={(e) => e.stopPropagation()}>
+      <Header onClick={(e) => e.stopPropagation()} /> {/* Prevent header clicks from propagating */}
+      <main className="flex flex-col items-center justify-center gap-6 flex-grow">
+        <div
+          className="flex flex-col items-center gap-4"
+          onClick={(e) => e.stopPropagation()} // Prevent click propagation to the parent
+        >
           <Top item={currentTop} onClick={() => randomizeItem("top")} />
           <Pants item={currentPants} onClick={() => randomizeItem("pants")} />
           <Shoes item={currentShoes} onClick={() => randomizeItem("shoes")} />
-      </div>
+        </div>
+      </main>
     </div>
   );
 };
