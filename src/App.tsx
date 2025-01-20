@@ -5,6 +5,7 @@ import Shoes from "./components/Shoes";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./index.css";
+import axios from "axios"
 
 type OutfitItem = string;
 
