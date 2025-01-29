@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 *.txt
+backend/instance/*
+__pycache__/
+*.pyc
+*.pyo
 
 # Editor directories and files
 .vscode/*

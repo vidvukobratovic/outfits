@@ -1,26 +1,19 @@
-from flask import Flask, jsonify
-from flask_cors import CORS
-import random
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from models import db, Garment
 
 app = Flask(__name__)
-CORS(app)  # Allow all domains to access the backend API
 
-@app.route("/api/randomize")
-def randomize():
-    tops = ["Red T-Shirt", "Blue Sweater", "White Blouse", "Green Hoodie"]
-    pants = ["Jeans", "Black Trousers", "Shorts", "Cargo Pants"]
-    shoes = ["Sneakers", "Boots", "Sandals", "Loafers"]
+# SQLite database configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    # Randomly select one item from each category
-    random_top = random.choice(tops)
-    random_pants = random.choice(pants)
-    random_shoes = random.choice(shoes)
+db.init_app(app)
 
-    return jsonify({
-        "top": random_top,
-        "pants": random_pants,
-        "shoes": random_shoes
-    })
+# Create tables if they don't exist
+with app.app_context():
+    db.create_all()
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)
+
