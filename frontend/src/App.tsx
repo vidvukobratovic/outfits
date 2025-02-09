@@ -19,7 +19,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
-      <Header onClick={(e) => e.stopPropagation()} />
+      <Header />
       <main className="flex flex-col items-center justify-center flex-grow gap-6 py-4">
         <div className="flex flex-col gap-8">
           {/* Garment Uploads */}
