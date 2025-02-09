@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
+import text from "../constants/text.json";
 
 type GarmentUploadProps = {
   category: "top" | "bottom" | "shoes";
@@ -8,7 +9,7 @@ type GarmentUploadProps = {
 };
 
 const GarmentUpload: React.FC<GarmentUploadProps> = ({ category, onImageUploaded }) => {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const onDrop = async (acceptedFiles: File[]) => {
     const formData = new FormData();
@@ -20,22 +21,26 @@ const GarmentUpload: React.FC<GarmentUploadProps> = ({ category, onImageUploaded
           "Content-Type": "multipart/form-data",
         },
       });
-      setImageUrl(response.data.image_url);
-      onImageUploaded(category, response.data.image_url); // Notify parent component
+      onImageUploaded(category, response.data.image_url);
     } catch (error) {
       console.error("Error uploading image:", error);
     }
   };
 
-  const { getRootProps, getInputProps } = useDropzone({ onDrop, multiple: false });
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    multiple: false,
+    noClick: true, // Prevents auto-opening file dialog when clicking inside dropzone
+  });
 
   return (
-    <div>
-      <div {...getRootProps()} className="dropzone">
-        <input {...getInputProps()} />
-        <p>Drag & drop an image for {category}, or click to select one</p>
-      </div>
-      {imageUrl && <img src={imageUrl} alt={`${category} garment`} />}
+    <div
+      {...getRootProps()}
+      className="w-full h-32 flex items-center justify-center cursor-pointer"
+      onClick={() => inputRef.current?.click()} // Triggers file dialog on click
+    >
+      <input {...getInputProps()} ref={inputRef} />
+      <p className="text-gray-500">{text.modal.uploadGarment}{category}</p>
     </div>
   );
 };

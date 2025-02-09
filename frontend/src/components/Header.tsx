@@ -20,16 +20,15 @@ const Header: React.FC = () => {
 
       {/* Modal for Uploading Garments */}
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <h2 className="text-xl font-semibold text-center mb-4">Upload Your Garments</h2>
+        <h2 className="text-xl font-semibold text-center mb-4">{text.header.upload}</h2>
         <div className="flex flex-col gap-4">
-          {/* Stacked Garment Upload Areas */}
-          <div className="border-2 border-dashed border-gray-400 rounded-lg p-6 flex items-center justify-center">
+          <div className="border-2 border-dashed border-gray-400 rounded-lg p-6 flex items-center justify-center transition-all duration-200 hover:bg-gray-200">
             <GarmentUpload category="top" onImageUploaded={() => {}} />
           </div>
-          <div className="border-2 border-dashed border-gray-400 rounded-lg p-6 flex items-center justify-center">
+          <div className="border-2 border-dashed border-gray-400 rounded-lg p-6 flex items-center justify-center transition-all duration-200 hover:bg-gray-200">
             <GarmentUpload category="bottom" onImageUploaded={() => {}} />
           </div>
-          <div className="border-2 border-dashed border-gray-400 rounded-lg p-6 flex items-center justify-center">
+          <div className="border-2 border-dashed border-gray-400 rounded-lg p-6 flex items-center justify-center transition-all duration-200 hover:bg-gray-200">
             <GarmentUpload category="shoes" onImageUploaded={() => {}} />
           </div>
         </div>
