@@ -14,6 +14,7 @@ const GarmentUpload: React.FC<GarmentUploadProps> = ({ category, onImageUploaded
   const onDrop = async (acceptedFiles: File[]) => {
     const formData = new FormData();
     formData.append("file", acceptedFiles[0]);
+    formData.append("category", category); 
 
     try {
       const response = await axios.post("http://localhost:5000/api/upload", formData, {
@@ -30,17 +31,17 @@ const GarmentUpload: React.FC<GarmentUploadProps> = ({ category, onImageUploaded
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     multiple: false,
-    noClick: true, // Prevents auto-opening file dialog when clicking inside dropzone
+    noClick: true,
   });
 
   return (
     <div
       {...getRootProps()}
       className="w-full h-32 flex items-center justify-center cursor-pointer"
-      onClick={() => inputRef.current?.click()} // Triggers file dialog on click
+      onClick={() => inputRef.current?.click()}
     >
       <input {...getInputProps()} ref={inputRef} />
-      <p className="text-gray-500">{text.modal.uploadGarment}{category}</p>
+      <p className="text-gray-500">{text.modal.uploadGarment} {category}</p>
     </div>
   );
 };
