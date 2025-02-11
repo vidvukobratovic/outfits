@@ -61,6 +61,19 @@ def upload_image():
 def test_route():
     return jsonify({"message": "API is working"}), 200
 
+@app.route("/api/garments", methods=["GET"])
+def get_garments():
+    try:
+        garments = Garment.query.all()
+        garments_data = [
+            {"id": g.id, "category": g.category, "name": g.name, "image_url": g.image_url}
+            for g in garments
+        ]
+        return jsonify(garments_data), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 # If running this file directly
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)
