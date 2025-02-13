@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useDropzone } from "react-dropzone";
-import axios from "axios";
+import { uploadGarment } from "../utils/api";
 import text from "../constants/text.json";
 
 type GarmentUploadProps = {
@@ -12,17 +12,9 @@ const GarmentUpload: React.FC<GarmentUploadProps> = ({ category, onImageUploaded
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const onDrop = async (acceptedFiles: File[]) => {
-    const formData = new FormData();
-    formData.append("file", acceptedFiles[0]);
-    formData.append("category", category); 
-
     try {
-      const response = await axios.post("http://localhost:5000/api/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      onImageUploaded(category, response.data.image_url);
+      const imageUrl = await uploadGarment(acceptedFiles[0], category);
+      onImageUploaded(category, imageUrl);
     } catch (error) {
       console.error("Error uploading image:", error);
     }

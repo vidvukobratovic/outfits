@@ -21,3 +21,19 @@ export const fetchOutfit = async () => {
     return null;
     }
 };
+
+export const uploadGarment = async (file: File, category: "top" | "bottom" | "shoes") => {
+const formData = new FormData();
+formData.append("file", file);
+formData.append("category", category);
+
+try {
+  const response = await axios.post("http://localhost:5000/api/upload", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+  return response.data.image_url;
+} catch (error) {
+  console.error("Error uploading image:", error);
+  throw error;
+}
+};
