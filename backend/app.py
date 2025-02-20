@@ -64,18 +64,6 @@ def upload_image():
         print("Upload Error:", str(e))
         return jsonify({"error": str(e)}), 500
 
-@app.route("/api/garments", methods=["GET"])
-def get_garments():
-    try:
-        garments = Garment.query.all()
-        garments_data = [
-            {"id": g.id, "category": g.category, "name": g.name, "image_url": g.image_url}
-            for g in garments
-        ]
-        return jsonify(garments_data), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
 @app.route("/api/outfit", methods=["GET"])
 def get_outfit():
     try:
@@ -96,7 +84,25 @@ def get_outfit():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route("/api/random", methods=["GET"])
+def get_random_garment():
+    category = request.args.get("category")
 
+    if not category:
+        return jsonify({"error": "Category is required"}), 400
+
+    # Fetch a random garment from the given category
+    garment = Garment.query.filter_by(category=category).order_by(db.func.random()).first()
+
+    if not garment:
+        return jsonify({"error": f"No garments found for category '{category}'"}), 404
+
+    return jsonify({
+        "id": garment.id,
+        "category": garment.category,
+        "name": garment.name,
+        "image_url": garment.image_url
+    })
 
 # If running this file directly
 if __name__ == "__main__":
